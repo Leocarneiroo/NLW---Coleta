@@ -1,18 +1,23 @@
 import express from 'express';
+import routes from './routes';
+
+
+// rota é o endereço completo da requisição
+// recurso: qual a entidade que estamos acessando no sistema
+
+//GET : buscar informações no BE
+//POST: enviar informações no BE
+//PUT: atualizar informação
+//DELETE : deletar informação
+
+//Request Params - parametros na propria rota qe identificam um unico recurso
+//Query params - parametros da propria rota, geralmente opcionais, para filtros e paginação
+//Request body - parametros para criação/atualização de informações
 
 const app = express();
 
-app.get('/users', (request, response) => {
-    console.log('Listagem de usuários');
+app.use(express.json());
 
-    //JSON
-
-    response.json([
-        'Diego',
-        'Claiton',
-        'Robsu',
-        'Daniel'
-    ]);
-});
+app.use(routes);
 
 app.listen(3333);
