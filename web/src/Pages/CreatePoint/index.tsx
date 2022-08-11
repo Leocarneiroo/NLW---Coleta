@@ -34,10 +34,15 @@ const CreatePoint = () => {
     const [cities, setCities] = useState<string[]>([]);
 
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
-
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        whatsapp: '',
+    });
 
     const [selectedUf, setSelectedUf] = useState('0');
     const [selectedCity, setSelectedCity] = useState('0');
+    const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
 
     useEffect(() => {
@@ -102,6 +107,12 @@ const CreatePoint = () => {
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+        const {name, value} = event.target;
+
+        setFormData({...formData, [name]: value});
+    }
+
+    function handleSelectItem(id: number) {
 
     }
 
@@ -211,11 +222,11 @@ const CreatePoint = () => {
 
                     <ul className="items-grid">
                         {items.map(item => (
-                            <li key={item.id}>
+                            <li key={item.id} onClick={() => handleSelectItem(item.id)}>
                                 <img src={item.image_url} alt={item.title} />
                                 <span>{item.title}</span>
                             </li>
-                        ))};
+                        ))}
                     </ul>
                 </fieldset>
 
